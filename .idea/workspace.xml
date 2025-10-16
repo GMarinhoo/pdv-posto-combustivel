@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3e9a78be-a773-4a2d-8397-d9a9c315396a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/entity/Pessoa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/service/AcessoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/service/ContatoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/service/CustoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/service/EstoqueService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/service/PessoaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/service/PrecoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/service/ProdutoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/PessoaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/PessoaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pdvpostocombustivel.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/backlog/backlog_pdvpostocombustivel.txt" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/doc/backlog/backlog_pdvpostocombustivel.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/PdvpostocombustivelApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/PdvpostocombustivelApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/entity/Acesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/entity/Acesso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/entity/Contato.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/entity/Contato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/entity/Custo.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/entity/Custo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/entity/Estoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/entity/Estoque.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/entity/Pessoa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/entity/Preco.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/entity/Preco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/entity/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/entity/Produto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/repository/AcessoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/repository/AcessoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/repository/ContatoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/repository/ContatoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/repository/CustoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/repository/CustoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/repository/EstoqueRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/repository/EstoqueRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/repository/PessoaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/repository/PessoaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/repository/PrecoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/repository/PrecoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/repository/ProdutoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/domain/repository/ProdutoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/service/AcessoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/service/ContatoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/service/CustoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/service/EstoqueService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/service/PessoaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/service/PrecoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/domain/service/ProdutoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/enums/TipoAcesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/enums/TipoAcesso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/enums/TipoContato.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/enums/TipoContato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/enums/TipoCusto.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/enums/TipoCusto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/enums/TipoEstoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/enums/TipoEstoque.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/enums/TipoPessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/enums/TipoPessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/enums/TipoPreco.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/enums/TipoPreco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/enums/TipoProduto.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/enums/TipoProduto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/PessoaController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/PessoaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/AcessoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/AcessoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/AcessoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/AcessoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/ContatoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/ContatoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/ContatoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/ContatoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/CustoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/CustoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/CustoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/CustoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/EstoqueRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/EstoqueRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/EstoqueResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/EstoqueResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/PessoaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/PessoaRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/PessoaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/PessoaResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/PrecoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/PrecoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/PrecoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/PrecoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/ProdutoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/ProdutoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/api/pessoa/dto/ProdutoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/pdvpostocombustivel/src/main/java/com/br/pdvpostocombustivel/pessoa/dto/ProdutoResponse.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Record" />
+        <option value="Class" />
+        <option value="Exception" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="32cPqI2RhefLlWaNntDMZYnsVdk" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.PdvpostocombustivelApplication.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "actions.on.save"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="PdvpostocombustivelApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.br.pdvpostocombustivel.PdvpostocombustivelApplication" />
+      <module name="pdvpostocombustivel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.br.pdvpostocombustivel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PdvpostocombustivelApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e9a78be-a773-4a2d-8397-d9a9c315396a" name="Changes" comment="" />
+      <created>1757717076859</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1757717076859</updated>
+    </task>
+    <servers />
+  </component>
+</project>
