@@ -21,7 +21,7 @@ public class EstoqueService {
     }
 
     public EstoqueResponse create(EstoqueRequest req) {
-        Estoque estoque = new Estoque(req.quantidade(), req.localTanque(), req.loteEndereco(), req.loteFabricacao(), req.dataValidade(), req.tipoEstoque()); // Assumindo Enum TipoEstoque como 'tipo'
+        Estoque estoque = new Estoque(req.quantidade(), req.localTanque(), req.loteEndereco(), req.loteFabricacao(), req.dataValidade(), req.tipo());
         repository.save(estoque);
         return toResponse(estoque);
     }
@@ -30,7 +30,7 @@ public class EstoqueService {
     public EstoqueResponse getById(Long id) {
         return repository.findById(id)
                 .map(this::toResponse)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Registro de estoque com código %d não encontrado", id))); // <-- Alterado
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Registro de estoque com código %d não encontrado", id)));
     }
 
     @Transactional(readOnly = true)
@@ -42,13 +42,13 @@ public class EstoqueService {
 
     public EstoqueResponse update(Long id, EstoqueRequest req) {
         Estoque estoque = repository.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Registro de estoque com código %d não encontrado", id))); // <-- Alterado
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Registro de estoque com código %d não encontrado", id)));
         estoque.setQuantidade(req.quantidade());
         estoque.setLocalTanque(req.localTanque());
         estoque.setLoteEndereco(req.loteEndereco());
         estoque.setLoteFabricacao(req.loteFabricacao());
         estoque.setDataValidade(req.dataValidade());
-        estoque.setTipo(req.tipoEstoque()); // Assumindo campo 'tipo'
+        estoque.setTipo(req.tipo());
         repository.save(estoque);
         return toResponse(estoque);
     }
