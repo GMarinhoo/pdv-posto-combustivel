@@ -1,22 +1,22 @@
 package com.br.pdvpostocombustivel.api.pessoa;
 
-
 import com.br.pdvpostocombustivel.api.pessoa.dto.PessoaRequest;
 import com.br.pdvpostocombustivel.api.pessoa.dto.PessoaResponse;
 import com.br.pdvpostocombustivel.domain.entity.Pessoa;
 import com.br.pdvpostocombustivel.domain.repository.PessoaRepository;
-import org.springframework.dao.DataIntegrityViolationException;
+import com.br.pdvpostocombustivel.exception.PessoaNaoEncontradaException;
+import com.br.pdvpostocombustivel.exception.RegraNegocioException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Transactional
 public class PessoaService {
 
-    // implementa a interface repository de pessoa
     private final PessoaRepository repository;
-
 
     public PessoaService(PessoaRepository repository) {
         this.repository = repository;
@@ -24,24 +24,27 @@ public class PessoaService {
 
     // CREATE
     public PessoaResponse create(PessoaRequest req) {
+        validarUnicidadeCpfCnpj(req.cpfCnpj(), null);
+
         Pessoa novaPessoa = toEntity(req);
-        return toResponse(repository.save(novaPessoa));
+        repository.save(novaPessoa); // Salva a entidade
+        return toResponse(novaPessoa); // Retorna o DTO da entidade salva (com ID)
     }
 
-    // READ by ID - validar a utilização desse método
+    // READ by ID
     @Transactional(readOnly = true)
     public PessoaResponse getById(Long id) {
-        Pessoa p = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada. id=" + id));
-        return toResponse(p);
+        return repository.findById(id)
+                .map(this::toResponse) // Se encontrar, mapeia para DTO
+                .orElseThrow(() -> new PessoaNaoEncontradaException(id));
     }
 
     // READ by CPF/CNPJ
     @Transactional(readOnly = true)
     public PessoaResponse getByCpfCnpj(String cpfCnpj) {
-        Pessoa p = repository.findByCpfCnpj(cpfCnpj)
-                .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada. cpfCnpj=" + cpfCnpj));
-        return toResponse(p);
+        return repository.findByCpfCnpj(cpfCnpj)
+                .map(this::toResponse) // Se encontrar, mapeia para DTO
+                .orElseThrow(() -> new PessoaNaoEncontradaException(String.format("Nenhuma pessoa encontrada com CPF/CNPJ '%s'.", cpfCnpj)));
     }
 
     // LIST paginado
@@ -51,59 +54,66 @@ public class PessoaService {
         return repository.findAll(pageable).map(this::toResponse);
     }
 
-    // UPDATE  - substitui todos os campos
+    // UPDATE
     public PessoaResponse update(Long id, PessoaRequest req) {
         Pessoa p = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada. id=" + id));
+                .orElseThrow(() -> new PessoaNaoEncontradaException(id));
 
+        // Valida unicidade apenas se o CPF/CNPJ foi alterado
         if (req.cpfCnpj() != null && !req.cpfCnpj().equals(p.getCpfCnpj())) {
             validarUnicidadeCpfCnpj(req.cpfCnpj(), id);
         }
 
+        // Atualiza os dados da entidade existente
         p.setNomeCompleto(req.nomeCompleto());
         p.setCpfCnpj(req.cpfCnpj());
         p.setNumeroCtps(req.numeroCtps());
         p.setDataNascimento(req.dataNascimento());
+        p.setTipoPessoa(req.tipoPessoa());
 
-        return toResponse(repository.save(p));
+        repository.save(p); // Salva a entidade atualizada
+        return toResponse(p);
     }
 
-    // PATCH - atualiza apenas campos não nulos
+    // PATCH
     public PessoaResponse patch(Long id, PessoaRequest req) {
         Pessoa p = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada. id=" + id));
+                .orElseThrow(() -> new PessoaNaoEncontradaException(id));
 
-        if (req.nomeCompleto() != null)  p.setNomeCompleto(req.nomeCompleto());
+        // Aplica atualizações parciais
+        if (req.nomeCompleto() != null) p.setNomeCompleto(req.nomeCompleto());
         if (req.cpfCnpj() != null) {
             if (!req.cpfCnpj().equals(p.getCpfCnpj())) {
                 validarUnicidadeCpfCnpj(req.cpfCnpj(), id);
             }
             p.setCpfCnpj(req.cpfCnpj());
         }
-        if (req.numeroCtps() != null)    p.setNumeroCtps(req.numeroCtps());
+        if (req.numeroCtps() != null) p.setNumeroCtps(req.numeroCtps());
         if (req.dataNascimento() != null) p.setDataNascimento(req.dataNascimento());
+        if (req.tipoPessoa() != null) p.setTipoPessoa(req.tipoPessoa());
 
-        return toResponse(repository.save(p));
+        repository.save(p); // Salva a entidade atualizada
+        return toResponse(p);
     }
 
     // DELETE
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new IllegalArgumentException("Pessoa não encontrada. id=" + id);
+            throw new PessoaNaoEncontradaException(id);
         }
         repository.deleteById(id);
     }
 
     // ---------- Helpers ----------
     private void validarUnicidadeCpfCnpj(String cpfCnpj, Long idAtual) {
-        repository.findByCpfCnpj(cpfCnpj).ifPresent(existente -> {
-            if (idAtual == null || !existente.getId().equals(idAtual)) {
-                throw new DataIntegrityViolationException("CPF/CNPJ já cadastrado: " + cpfCnpj);
-            }
-        });
+        Optional<Pessoa> existente = repository.findByCpfCnpj(cpfCnpj);
+        if (existente.isPresent() && (idAtual == null || !existente.get().getId().equals(idAtual))) {
+            throw new RegraNegocioException("CPF/CNPJ já cadastrado: " + cpfCnpj);
+        }
     }
 
     private Pessoa toEntity(PessoaRequest req) {
+        // Certifique-se que sua entidade Pessoa tem este construtor
         return new Pessoa(
                 req.nomeCompleto(),
                 req.cpfCnpj(),
@@ -114,6 +124,7 @@ public class PessoaService {
     }
 
     private PessoaResponse toResponse(Pessoa p) {
+        // Certifique-se que seu DTO PessoaResponse tem estes campos na ordem correta
         return new PessoaResponse(
                 p.getId(),
                 p.getNomeCompleto(),

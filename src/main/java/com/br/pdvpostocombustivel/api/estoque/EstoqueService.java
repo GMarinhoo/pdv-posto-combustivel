@@ -4,12 +4,14 @@ import com.br.pdvpostocombustivel.api.estoque.dto.EstoqueRequest;
 import com.br.pdvpostocombustivel.api.estoque.dto.EstoqueResponse;
 import com.br.pdvpostocombustivel.domain.entity.Estoque;
 import com.br.pdvpostocombustivel.domain.repository.EstoqueRepository;
+import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException; // <-- Import
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class EstoqueService {
 
     private final EstoqueRepository repository;
@@ -18,53 +20,51 @@ public class EstoqueService {
         this.repository = repository;
     }
 
-    @Transactional
     public EstoqueResponse create(EstoqueRequest req) {
-        Estoque estoque = new Estoque(req.quantidade(), req.localTanque(), req.loteEndereco(), req.loteFabricacao(), req.dataValidade(), req.tipoEstoque());
+        Estoque estoque = new Estoque(req.quantidade(), req.localTanque(), req.loteEndereco(), req.loteFabricacao(), req.dataValidade(), req.tipoEstoque()); // Assumindo Enum TipoEstoque como 'tipo'
         repository.save(estoque);
         return toResponse(estoque);
     }
 
+    @Transactional(readOnly = true)
     public EstoqueResponse getById(Long id) {
-        Estoque estoque = repository.findById(id).orElseThrow(() -> new RuntimeException("Estoque não encontrado"));
-        return toResponse(estoque);
+        return repository.findById(id)
+                .map(this::toResponse)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Registro de estoque com código %d não encontrado", id))); // <-- Alterado
     }
 
+    @Transactional(readOnly = true)
     public List<EstoqueResponse> listAll() {
         return repository.findAll().stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
-    @Transactional
     public EstoqueResponse update(Long id, EstoqueRequest req) {
-        Estoque estoque = repository.findById(id).orElseThrow(() -> new RuntimeException("Estoque não encontrado"));
+        Estoque estoque = repository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Registro de estoque com código %d não encontrado", id))); // <-- Alterado
         estoque.setQuantidade(req.quantidade());
         estoque.setLocalTanque(req.localTanque());
         estoque.setLoteEndereco(req.loteEndereco());
         estoque.setLoteFabricacao(req.loteFabricacao());
         estoque.setDataValidade(req.dataValidade());
+        estoque.setTipo(req.tipoEstoque()); // Assumindo campo 'tipo'
         repository.save(estoque);
         return toResponse(estoque);
     }
 
-    @Transactional
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new RuntimeException("Estoque não encontrado");
+            throw new EntidadeNaoEncontradaException(String.format("Registro de estoque com código %d não encontrado", id)); // <-- Alterado
         }
         repository.deleteById(id);
     }
 
     private EstoqueResponse toResponse(Estoque estoque) {
         return new EstoqueResponse(
-                estoque.getId(),
-                estoque.getQuantidade(),
-                estoque.getLocalTanque(),
-                estoque.getLoteEndereco(),
-                estoque.getLoteFabricacao(),
-                estoque.getDataValidade(),
-                estoque.getTipo()
+                estoque.getId(), estoque.getQuantidade(), estoque.getLocalTanque(),
+                estoque.getLoteEndereco(), estoque.getLoteFabricacao(), estoque.getDataValidade(),
+                estoque.getTipo() // Assumindo campo 'tipo'
         );
     }
 }
