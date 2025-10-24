@@ -2,10 +2,13 @@ package com.br.pdvpostocombustivel.domain.repository;
 
 import com.br.pdvpostocombustivel.domain.entity.Acesso;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository; // Adicione @Repository
 import java.util.Optional;
 
+@Repository
 public interface AcessoRepository extends JpaRepository<Acesso, Long> {
-    Optional<Acesso> findByusuario(String usuario);
 
-    boolean existsByusuario(String usuario);
+    Optional<Acesso> findByUsuario(String usuario); // <-- 'U' maiúsculo
+
+    boolean existsByUsuario(String usuario); // <-- 'U' maiúsculo
 }

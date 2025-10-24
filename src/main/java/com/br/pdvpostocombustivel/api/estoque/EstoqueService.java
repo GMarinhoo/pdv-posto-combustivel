@@ -4,7 +4,7 @@ import com.br.pdvpostocombustivel.api.estoque.dto.EstoqueRequest;
 import com.br.pdvpostocombustivel.api.estoque.dto.EstoqueResponse;
 import com.br.pdvpostocombustivel.domain.entity.Estoque;
 import com.br.pdvpostocombustivel.domain.repository.EstoqueRepository;
-import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException; // <-- Import
+import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;

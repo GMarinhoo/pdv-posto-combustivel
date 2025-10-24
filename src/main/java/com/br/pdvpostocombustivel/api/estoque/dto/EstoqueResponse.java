@@ -12,6 +12,5 @@ public record EstoqueResponse(
         String loteEndereco,
         String loteFabricacao,
         Date dataValidade,
-        TipoEstoque tipoEstoque
-) {
-}
+        TipoEstoque tipo
+) {}
