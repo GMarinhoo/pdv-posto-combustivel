@@ -21,7 +21,7 @@ public class AcessoService {
 
     public AcessoResponse registrar(AcessoRequest req) {
         // Validação de usuário duplicado
-        Optional<Acesso> acessoExistente = repository.findByusuario(req.usuiario());
+        Optional<Acesso> acessoExistente = repository.findByUsuario(req.usuiario());
         if (acessoExistente.isPresent()) {
             throw new RegraNegocioException(String.format("Nome de usuário '%s' já está em uso.", req.usuiario())); // <-- Usa RegraNegocioException
         }
