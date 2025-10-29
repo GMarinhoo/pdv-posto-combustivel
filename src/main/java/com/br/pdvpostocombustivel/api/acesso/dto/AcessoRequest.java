@@ -3,7 +3,7 @@ package com.br.pdvpostocombustivel.api.acesso.dto;
 import com.br.pdvpostocombustivel.enums.TipoAcesso;
 
 public record AcessoRequest(
-        String usuiario,
+        String usuario,
         String senha,
         TipoAcesso perfil)
 {}

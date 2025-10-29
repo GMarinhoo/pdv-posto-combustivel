@@ -25,7 +25,7 @@ public class Acesso {
     public Acesso (String usuario, String senha, TipoAcesso Tipo) {
         this.usuario = usuario;
         this.senha = senha;
-        this.perfil = perfil;
+        this.perfil = Tipo;
     }
 
     public Acesso () {

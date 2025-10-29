@@ -7,6 +7,6 @@ public record CustoRequest(
         Double custoVariavel,
         Double custoFixo,
         Double margemLucro,
-        Date dataProcessameto
+        Date dataProcessamento
 ) {
 }

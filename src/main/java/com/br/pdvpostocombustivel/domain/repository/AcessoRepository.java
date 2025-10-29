@@ -8,7 +8,7 @@ import java.util.Optional;
 @Repository
 public interface AcessoRepository extends JpaRepository<Acesso, Long> {
 
-    Optional<Acesso> findByUsuario(String usuario); // <-- 'U' maiúsculo
+    Optional<Acesso> findByUsuario(String usuario);
 
-    boolean existsByUsuario(String usuario); // <-- 'U' maiúsculo
+    boolean existsByUsuario(String usuario);
 }

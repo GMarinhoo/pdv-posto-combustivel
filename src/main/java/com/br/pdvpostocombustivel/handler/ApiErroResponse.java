@@ -24,7 +24,6 @@ public class ApiErroResponse {
         this.timestamp = LocalDateTime.now();
     }
 
-    // Getters e Setters (IMPORTANTE!)
     public int getStatus() {
         return status;
     }

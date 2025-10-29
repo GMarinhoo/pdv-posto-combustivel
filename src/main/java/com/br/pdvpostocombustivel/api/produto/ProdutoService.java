@@ -22,10 +22,9 @@ public class ProdutoService {
     }
 
     public ProdutoResponse create(ProdutoRequest req) {
-        // Opcional: Adicionar validação de nome/referência duplicado aqui usando RegraNegocioException
         Produto produto = new Produto(
                 req.nome(), req.referencia(), req.fornecedor(),
-                req.categoria(), req.marca(), req.tipoProduto() // Assumindo que você integrou o Enum TipoCombustivel como 'tipo'
+                req.categoria(), req.marca(), req.tipoProduto()
         );
         repository.save(produto);
         return toResponse(produto);
@@ -35,7 +34,7 @@ public class ProdutoService {
     public ProdutoResponse getById(Long id) {
         return repository.findById(id)
                 .map(this::toResponse)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Produto com código %d não encontrado", id))); // <-- Alterado
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Produto com código %d não encontrado", id)));
     }
 
     @Transactional(readOnly = true)
@@ -47,16 +46,15 @@ public class ProdutoService {
 
     public ProdutoResponse update(Long id, ProdutoRequest req) {
         Produto produto = repository.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Produto com código %d não encontrado", id))); // <-- Alterado
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Produto com código %d não encontrado", id)));
 
-        // Opcional: Adicionar validação de nome/referência duplicado aqui (pertencente a OUTRO produto)
 
         produto.setNome(req.nome());
         produto.setReferencia(req.referencia());
         produto.setFornecedor(req.fornecedor());
         produto.setCategoria(req.categoria());
         produto.setMarca(req.marca());
-        produto.setTipo(req.tipoProduto()); // Assumindo campo 'tipo'
+        produto.setTipo(req.tipoProduto());
 
         repository.save(produto);
         return toResponse(produto);
@@ -64,7 +62,7 @@ public class ProdutoService {
 
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntidadeNaoEncontradaException(String.format("Produto com código %d não encontrado", id)); // <-- Alterado
+            throw new EntidadeNaoEncontradaException(String.format("Produto com código %d não encontrado", id));
         }
         repository.deleteById(id);
     }
@@ -73,7 +71,7 @@ public class ProdutoService {
         return new ProdutoResponse(
                 produto.getId(), produto.getNome(), produto.getReferencia(),
                 produto.getFornecedor(), produto.getCategoria(), produto.getMarca(),
-                produto.getTipo() // Assumindo campo 'tipo'
+                produto.getTipo()
         );
     }
 }

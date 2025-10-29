@@ -20,14 +20,13 @@ public class AcessoService {
     }
 
     public AcessoResponse registrar(AcessoRequest req) {
-        // Validação de usuário duplicado
-        Optional<Acesso> acessoExistente = repository.findByUsuario(req.usuiario());
+        Optional<Acesso> acessoExistente = repository.findByUsuario(req.usuario());
         if (acessoExistente.isPresent()) {
-            throw new RegraNegocioException(String.format("Nome de usuário '%s' já está em uso.", req.usuiario())); // <-- Usa RegraNegocioException
+            throw new RegraNegocioException(String.format("Nome de usuário '%s' já está em uso.", req.usuario()));
         }
 
-        Acesso novoAcesso = new Acesso(req.usuiario(), req.senha(), req.perfil()); // Assumindo enum TipoAcesso como 'perfil'
+        Acesso novoAcesso = new Acesso(req.usuario(), req.senha(), req.perfil());
         repository.save(novoAcesso);
-        return new AcessoResponse(novoAcesso.getId(), novoAcesso.getUsuario(), novoAcesso.getPerfil()); // Assumindo enum TipoAcesso como 'perfil'
+        return new AcessoResponse(novoAcesso.getId(), novoAcesso.getUsuario(), novoAcesso.getPerfil());
     }
 }
