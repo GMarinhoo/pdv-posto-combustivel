@@ -4,6 +4,9 @@ import com.br.pdvpostocombustivel.enums.TipoProduto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "produto")
 public class Produto {
@@ -25,6 +28,13 @@ public class Produto {
 
     @Column(length = 50, nullable = false)
     private String marca;
+
+    @OneToMany(
+            mappedBy = "produto",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Preco> historicoPrecos = new ArrayList<>();
 
     @NotNull
     @Enumerated(EnumType.STRING)

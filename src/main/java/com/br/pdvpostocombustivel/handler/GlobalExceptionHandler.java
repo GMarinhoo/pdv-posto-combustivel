@@ -3,6 +3,7 @@ package com.br.pdvpostocombustivel.handler;
 import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
 import com.br.pdvpostocombustivel.exception.PessoaNaoEncontradaException;
 import com.br.pdvpostocombustivel.exception.RegraNegocioException;
+import com.br.pdvpostocombustivel.exception.SenhaInvalidaException;
 import io.swagger.v3.oas.annotations.Hidden;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RegraNegocioException.class)
     public ResponseEntity<ApiErroResponse> handleRegraDeNegocio(RegraNegocioException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        ApiErroResponse body = new ApiErroResponse(status.value(), ex.getMessage());
+        logger.warn("{} Path: {}", ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(body, status);
+    }
+
+    @ExceptionHandler(SenhaInvalidaException.class)
+    public ResponseEntity<ApiErroResponse> handleSenhaInvalida(SenhaInvalidaException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.UNAUTHORIZED; // 401
         ApiErroResponse body = new ApiErroResponse(status.value(), ex.getMessage());
         logger.warn("{} Path: {}", ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(body, status);

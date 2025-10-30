@@ -1,6 +1,6 @@
 package com.br.pdvpostocombustivel.api.auth;
 
-import com.br.pdvpostocombustivel.api.auth.LoginRequest;
+import com.br.pdvpostocombustivel.api.acesso.dto.AcessoResponse; // <-- Import importante
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +19,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginRequest loginRequest) {
-        try {
-            var dadosUsuarioAutenticado = authService.authenticate(loginRequest);
-            return ResponseEntity.ok(dadosUsuarioAutenticado);
-
-        } catch (Exception e) {
-            return ResponseEntity.status(401).body("Falha na autenticação: " + e.getMessage());
-        }
+    public ResponseEntity<AcessoResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
+        var dadosUsuarioAutenticado = authService.authenticate(loginRequest);
+        return ResponseEntity.ok(dadosUsuarioAutenticado);
     }
 }

@@ -3,6 +3,7 @@ package com.br.pdvpostocombustivel.domain.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,20 +16,20 @@ public class Preco {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @Column(length = 10, nullable = false)
-    private String dataAlteracao;
+    @Column(name = "data_hora_alteracao", nullable = false)
+    private LocalDateTime dataHoraAlteracao;
 
-    @Column(nullable = false)
-    private Date horaAlteracao;
-
-    public Preco (BigDecimal valor, String dataAlteracao, Date horaAlteracao) {
-        this.valor = valor;
-        this.dataAlteracao = dataAlteracao;
-        this.horaAlteracao = horaAlteracao;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_produto", nullable = false)
+    private Produto produto;
 
     public Preco () {
+    }
 
+    public Preco (BigDecimal valor, LocalDateTime dataHoraAlteracao, Produto produto) {
+        this.valor = valor;
+        this.dataHoraAlteracao = dataHoraAlteracao;
+        this.produto = produto;
     }
 
     public Long getId () {
@@ -39,24 +40,24 @@ public class Preco {
         return valor;
     }
 
-    public String getDataAlteracao() {
-        return dataAlteracao;
+    public LocalDateTime getDataHoraAlteracao() {
+        return dataHoraAlteracao;
     }
 
-    public Date getHoraAlteracao() {
-        return horaAlteracao;
+    public Produto getProduto() {
+        return produto;
     }
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public void setDataAlteracao(String dataAlteracao) {
-        this.dataAlteracao = dataAlteracao;
+    public void setDataHoraAlteracao(LocalDateTime dataHoraAlteracao) {
+        this.dataHoraAlteracao = dataHoraAlteracao;
     }
 
-    public void setHoraAlteracao(Date horaAlteracao) {
-        this.horaAlteracao = horaAlteracao;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public void setId(Long id) {

@@ -5,7 +5,6 @@ import java.util.Date;
 
 public record PrecoRequest(
         BigDecimal valor,
-        String dataAlteracao,
-        Date horaAlteracao
+        Long idProduto
 ) {
 }

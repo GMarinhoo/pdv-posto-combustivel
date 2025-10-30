@@ -3,10 +3,14 @@ package com.br.pdvpostocombustivel.api.preco;
 import com.br.pdvpostocombustivel.api.preco.dto.PrecoRequest;
 import com.br.pdvpostocombustivel.api.preco.dto.PrecoResponse;
 import com.br.pdvpostocombustivel.domain.entity.Preco;
+import com.br.pdvpostocombustivel.domain.entity.Produto;
 import com.br.pdvpostocombustivel.domain.repository.PrecoRepository;
-import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException; // <-- Import
+import com.br.pdvpostocombustivel.domain.repository.ProdutoRepository;
+import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,13 +19,20 @@ import java.util.stream.Collectors;
 public class PrecoService {
 
     private final PrecoRepository repository;
+    private final ProdutoRepository produtoRepository;
 
-    public PrecoService(PrecoRepository repository) {
+    public PrecoService(PrecoRepository repository, ProdutoRepository produtoRepository) {
         this.repository = repository;
+        this.produtoRepository = produtoRepository;
     }
 
     public PrecoResponse create(PrecoRequest req) {
-        Preco preco = new Preco(req.valor(), req.dataAlteracao(), req.horaAlteracao());
+        Produto produto = produtoRepository.findById(req.idProduto())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                        String.format("Produto com código %d não encontrado", req.idProduto())));
+
+        Preco preco = new Preco(req.valor(), LocalDateTime.now(), produto);
+
         repository.save(preco);
         return toResponse(preco);
     }
@@ -30,7 +41,7 @@ public class PrecoService {
     public PrecoResponse getById(Long id) {
         return repository.findById(id)
                 .map(this::toResponse)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Preço com código %d não encontrado", id))); // <-- Alterado
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Preço com código %d não encontrado", id)));
     }
 
     @Transactional(readOnly = true)
@@ -42,25 +53,33 @@ public class PrecoService {
 
     public PrecoResponse update(Long id, PrecoRequest req) {
         Preco preco = repository.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Preço com código %d não encontrado", id))); // <-- Alterado
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Preço com código %d não encontrado", id)));
+
+        Produto produto = produtoRepository.findById(req.idProduto())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                        String.format("Produto com código %d não encontrado", req.idProduto())));
+
         preco.setValor(req.valor());
-        preco.setDataAlteracao(req.dataAlteracao());
-        preco.setHoraAlteracao(req.horaAlteracao());
+        preco.setProduto(produto);
+        preco.setDataHoraAlteracao(LocalDateTime.now());
+
         repository.save(preco);
         return toResponse(preco);
     }
 
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntidadeNaoEncontradaException(String.format("Preço com código %d não encontrado", id)); // <-- Alterado
+            throw new EntidadeNaoEncontradaException(String.format("Preço com código %d não encontrado", id));
         }
         repository.deleteById(id);
     }
 
     private PrecoResponse toResponse(Preco preco) {
         return new PrecoResponse(
-                preco.getId(), preco.getValor(),
-                preco.getDataAlteracao(), preco.getHoraAlteracao()
+                preco.getId(),
+                preco.getValor(),
+                preco.getDataHoraAlteracao(),
+                preco.getProduto().getId()
         );
     }
 }
