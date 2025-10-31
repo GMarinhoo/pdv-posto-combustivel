@@ -20,9 +20,6 @@ public class VendaItem {
     @Column(name = "preco_total", nullable = false, precision = 10, scale = 2)
     private BigDecimal precoTotal;
 
-    @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
-    private BigDecimal valorTotal;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_venda", nullable = false)
     private Venda venda;
@@ -42,15 +39,8 @@ public class VendaItem {
     public BigDecimal getPrecoUnitario() { return precoUnitario; }
     public void setPrecoUnitario(BigDecimal precoUnitario) { this.precoUnitario = precoUnitario; }
 
-    public BigDecimal getPrecoTotal() {
-        return precoTotal;
-    }
-    public void setPrecoTotal(BigDecimal precoTotal) {
-        this.precoTotal = precoTotal;
-    }
-
-    public BigDecimal getValorTotal() { return valorTotal; }
-    public void setValorTotal(BigDecimal valorTotal) { this.valorTotal = valorTotal; }
+    public BigDecimal getPrecoTotal() { return precoTotal; }
+    public void setPrecoTotal(BigDecimal precoTotal) { this.precoTotal = precoTotal; }
 
     public Venda getVenda() { return venda; }
     public void setVenda(Venda venda) { this.venda = venda; }
