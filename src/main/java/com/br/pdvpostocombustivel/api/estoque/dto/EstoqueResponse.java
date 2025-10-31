@@ -7,6 +7,7 @@ import java.util.Date;
 
 public record EstoqueResponse(
         Long id,
+        Long idProduto,
         BigDecimal quantidade,
         String localTanque,
         String loteEndereco,

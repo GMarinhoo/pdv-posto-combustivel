@@ -1,6 +1,7 @@
 package com.br.pdvpostocombustivel.domain.repository;
 
 import com.br.pdvpostocombustivel.domain.entity.Estoque;
+import com.br.pdvpostocombustivel.domain.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
@@ -19,4 +20,5 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Long> {
 
     boolean existsByLoteFabricacao(String loteFabricacao);
 
+    Optional<Estoque> findByProduto(Produto produto);
 }

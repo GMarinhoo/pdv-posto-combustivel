@@ -1,4 +1,4 @@
-package com.br.pdvpostocombustivel.api.vendaItem.dto;
+package com.br.pdvpostocombustivel.api.venda.dto;
 
 import java.math.BigDecimal;
 

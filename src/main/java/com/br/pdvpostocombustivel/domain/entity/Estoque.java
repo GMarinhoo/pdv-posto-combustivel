@@ -1,10 +1,8 @@
 package com.br.pdvpostocombustivel.domain.entity;
 
 import com.br.pdvpostocombustivel.enums.TipoEstoque;
-import com.br.pdvpostocombustivel.enums.TipoProduto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -35,17 +33,21 @@ public class Estoque {
     @Column(name = "tipo_estoque", nullable = false)
     private TipoEstoque tipo;
 
-    public Estoque (BigDecimal quantidade, String localTanque, String loteEndereco, String loteFabricacao, Date dataValidade, TipoEstoque tipo) {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_produto", nullable = false, unique = true)
+    private Produto produto;
+
+    public Estoque (BigDecimal quantidade, String localTanque, String loteEndereco, String loteFabricacao, Date dataValidade, TipoEstoque tipo, Produto produto) {
         this.quantidade = quantidade;
         this.localTanque = localTanque;
         this.loteEndereco = loteEndereco;
         this.loteFabricacao = loteFabricacao;
         this.dataValidade = dataValidade;
         this.tipo = tipo;
+        this.produto = produto;
     }
 
     public Estoque () {
-
     }
 
     public Long getId () {
@@ -102,5 +104,13 @@ public class Estoque {
 
     public void setTipo(TipoEstoque tipo) {
         this.tipo = tipo;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

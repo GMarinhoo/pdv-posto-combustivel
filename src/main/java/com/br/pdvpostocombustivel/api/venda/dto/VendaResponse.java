@@ -1,7 +1,5 @@
 package com.br.pdvpostocombustivel.api.venda.dto;
 
-import com.br.pdvpostocombustivel.api.vendaItem.dto.VendaItemResponse;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;

@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public record EstoqueRequest(
+        Long idProduto,
         BigDecimal quantidade,
         String localTanque,
         String loteEndereco,
