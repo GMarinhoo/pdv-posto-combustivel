@@ -6,10 +6,7 @@ import com.br.pdvpostocombustivel.api.venda.dto.VendaItemResponse;
 import com.br.pdvpostocombustivel.api.venda.dto.VendaRequest;
 import com.br.pdvpostocombustivel.api.venda.dto.VendaResponse;
 import com.br.pdvpostocombustivel.domain.entity.*;
-import com.br.pdvpostocombustivel.domain.repository.PessoaRepository;
-import com.br.pdvpostocombustivel.domain.repository.PrecoRepository;
-import com.br.pdvpostocombustivel.domain.repository.ProdutoRepository;
-import com.br.pdvpostocombustivel.domain.repository.VendaRepository;
+import com.br.pdvpostocombustivel.domain.repository.*;
 import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
 import com.br.pdvpostocombustivel.exception.RegraNegocioException;
 import org.springframework.stereotype.Service;
@@ -28,17 +25,20 @@ public class VendaService {
     private final ProdutoRepository produtoRepository;
     private final PrecoRepository precoRepository;
     private final EstoqueService estoqueService;
+    private final AcessoRepository acessoRepository;
 
     public VendaService(VendaRepository vendaRepository,
                         PessoaRepository pessoaRepository,
                         ProdutoRepository produtoRepository,
                         PrecoRepository precoRepository,
-                        EstoqueService estoqueService) {
+                        EstoqueService estoqueService,
+                        AcessoRepository acessoRepository) {
         this.vendaRepository = vendaRepository;
         this.pessoaRepository = pessoaRepository;
         this.produtoRepository = produtoRepository;
         this.precoRepository = precoRepository;
         this.estoqueService = estoqueService;
+        this.acessoRepository = acessoRepository;
     }
 
     @Transactional
@@ -47,8 +47,13 @@ public class VendaService {
             throw new RegraNegocioException("A venda precisa ter pelo menos 1 item.");
         }
 
-        Pessoa frentista = pessoaRepository.findById(req.idFrentista())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Frentista não encontrado: " + req.idFrentista()));
+        Acesso acessoFrentista = acessoRepository.findById(req.idFrentista())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Acesso do frentista não encontrado: " + req.idFrentista()));
+        Pessoa frentista = acessoFrentista.getPessoa();
+
+        if (frentista == null) {
+            throw new RegraNegocioException("Este acesso de usuário (" + acessoFrentista.getUsuario() + ") não está vinculado a uma Pessoa.");
+        }
 
         Venda venda = new Venda();
         venda.setFrentista(frentista);

@@ -5,5 +5,6 @@ import com.br.pdvpostocombustivel.enums.TipoAcesso;
 public record AcessoRequest(
         String usuario,
         String senha,
-        TipoAcesso perfil)
+        TipoAcesso perfil,
+        Long idPessoa)
 {}

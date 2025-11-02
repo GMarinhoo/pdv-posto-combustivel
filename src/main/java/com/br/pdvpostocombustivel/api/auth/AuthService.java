@@ -2,6 +2,7 @@ package com.br.pdvpostocombustivel.api.auth;
 
 import com.br.pdvpostocombustivel.api.acesso.dto.AcessoResponse;
 import com.br.pdvpostocombustivel.domain.entity.Acesso;
+import com.br.pdvpostocombustivel.domain.entity.Pessoa;
 import com.br.pdvpostocombustivel.domain.repository.AcessoRepository;
 import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
 import com.br.pdvpostocombustivel.exception.SenhaInvalidaException;
@@ -28,10 +29,22 @@ public class AuthService {
             throw new SenhaInvalidaException();
         }
 
+        Pessoa pessoa = acesso.getPessoa();
+
+        Long idPessoa = null;
+        String nomePessoa = "Usuário sem Pessoa Vinculada";
+
+        if (pessoa != null) {
+            idPessoa = pessoa.getId();
+            nomePessoa = pessoa.getNomeCompleto();
+        }
+
         return new AcessoResponse(
                 acesso.getId(),
                 acesso.getUsuario(),
-                acesso.getPerfil()
+                acesso.getPerfil(),
+                (pessoa != null) ? pessoa.getId() : null,
+                (pessoa != null) ? pessoa.getNomeCompleto() : "Usuário sem Pessoa"
         );
     }
 }
