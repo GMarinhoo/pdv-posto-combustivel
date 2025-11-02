@@ -8,6 +8,7 @@ import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
 import com.br.pdvpostocombustivel.exception.SenhaInvalidaException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthService {
@@ -20,6 +21,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional(readOnly = true)
     public AcessoResponse authenticate(LoginRequest loginRequest) {
         Acesso acesso = acessoRepository.findByUsuario(loginRequest.usuario())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
@@ -43,8 +45,8 @@ public class AuthService {
                 acesso.getId(),
                 acesso.getUsuario(),
                 acesso.getPerfil(),
-                (pessoa != null) ? pessoa.getId() : null,
-                (pessoa != null) ? pessoa.getNomeCompleto() : "Usuário sem Pessoa"
+                idPessoa,
+                nomePessoa
         );
     }
 }
