@@ -42,4 +42,9 @@ public class PrecoController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    @GetMapping("/produto/{idProduto}")
+    public PrecoResponse getPrecoAtual(@PathVariable Long idProduto) {
+        return service.getPrecoAtualPorProduto(idProduto);
+    }
 }

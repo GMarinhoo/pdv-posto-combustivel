@@ -7,6 +7,7 @@ import com.br.pdvpostocombustivel.domain.entity.Produto;
 import com.br.pdvpostocombustivel.domain.repository.PrecoRepository;
 import com.br.pdvpostocombustivel.domain.repository.ProdutoRepository;
 import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
+import com.br.pdvpostocombustivel.exception.RegraNegocioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,5 +82,16 @@ public class PrecoService {
                 preco.getDataHoraAlteracao(),
                 preco.getProduto().getId()
         );
+    }
+
+    @Transactional(readOnly = true)
+    public PrecoResponse getPrecoAtualPorProduto(Long idProduto) {
+        Produto produto = produtoRepository.findById(idProduto)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Produto não encontrado: " + idProduto));
+
+        Preco preco = repository.findFirstByProdutoOrderByDataHoraAlteracaoDesc(produto)
+                .orElseThrow(() -> new RegraNegocioException("Produto " + produto.getNome() + " está sem preço cadastrado."));
+
+        return toResponse(preco);
     }
 }
