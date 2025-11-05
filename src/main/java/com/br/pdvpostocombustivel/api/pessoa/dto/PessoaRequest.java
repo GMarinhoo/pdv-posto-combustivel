@@ -4,9 +4,6 @@ import com.br.pdvpostocombustivel.enums.TipoPessoa;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
-/*
-  Para entrada
- */
 public record PessoaRequest(
         String nomeCompleto,
         String cpfCnpj,
@@ -16,6 +13,3 @@ public record PessoaRequest(
         TipoPessoa tipoPessoa){
 
 }
-
-
-

@@ -69,7 +69,7 @@ public class EstoqueService {
 
     @Transactional(readOnly = true)
     public List<EstoqueResponse> listAll() {
-        return repository.findAll().stream()
+        return repository.findAllComProduto().stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
