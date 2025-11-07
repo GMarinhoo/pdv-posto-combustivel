@@ -26,17 +26,14 @@ public class Pessoa {
     @Column(name = "nome_completo", nullable = false, length = 200)
     private String nomeCompleto;
 
-    // CPF (11) ou CNPJ (14). Deixo 20 para folga (hífens/pontos, se algum dia usar formatado).
     @NotBlank
     @Size(max = 20)
     @Column(name = "cpf_cnpj", nullable = false, length = 20, unique = true)
     private String cpfCnpj;
 
-    // CTPS numérico; sem 'length' (não se aplica a Long)
     @Column(name = "numero_ctps")
     private Long numeroCtps;
 
-    // Se quiser opcional, troque para nullable = true e remova @NotNull
     @NotNull
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
@@ -46,7 +43,6 @@ public class Pessoa {
     @Column(name = "tipo_pessoa", nullable = false, length = 15)
     private TipoPessoa tipoPessoa;
 
-    /** Construtor JPA */
     protected Pessoa() {}
 
     public Pessoa(String nomeCompleto,
@@ -61,7 +57,6 @@ public class Pessoa {
         this.tipoPessoa = tipoPessoa;
     }
 
-    // Getters/Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

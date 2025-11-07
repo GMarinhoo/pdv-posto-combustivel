@@ -16,7 +16,7 @@ public class Acesso implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String usuario;
 
     @Column(length = 100, nullable = false)
@@ -41,36 +41,16 @@ public class Acesso implements UserDetails {
 
     }
 
-    public Long getId() {
-        return id;
-    }
-    public String getUsuario () {
-        return usuario;
-    }
-    public String getSenha () {
-        return senha;
-    }
-    public TipoAcesso getPerfil() {
-        return perfil;
-    }
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-    public void setUsuario (String usuario) {
-        this.usuario = usuario;
-    }
-    public void setSenha (String senha) {
-        this.senha = senha;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setPerfil(TipoAcesso perfil) {
-        this.perfil = perfil;
-    }
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+    public Long getId() { return id; }
+    public String getUsuario () { return usuario; }
+    public String getSenha () { return senha; }
+    public TipoAcesso getPerfil() { return perfil; }
+    public Pessoa getPessoa() { return pessoa; }
+    public void setUsuario (String usuario) { this.usuario = usuario; }
+    public void setSenha (String senha) { this.senha = senha; }
+    public void setId(Long id) { this.id = id; }
+    public void setPerfil(TipoAcesso perfil) { this.perfil = perfil; }
+    public void setPessoa(Pessoa pessoa) { this.pessoa = pessoa; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -88,22 +68,14 @@ public class Acesso implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    public boolean isAccountNonExpired() { return true; }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+    public boolean isAccountNonLocked() { return true; }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+    public boolean isCredentialsNonExpired() { return true; }
 
     @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    public boolean isEnabled() { return true; }
 }

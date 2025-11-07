@@ -30,7 +30,6 @@ public class PessoaService {
         return toResponse(novaPessoa);
     }
 
-    // READ by ID
     @Transactional(readOnly = true)
     public PessoaResponse getById(Long id) {
         return repository.findById(id)
@@ -38,7 +37,6 @@ public class PessoaService {
                 .orElseThrow(() -> new PessoaNaoEncontradaException(id));
     }
 
-    // READ by CPF/CNPJ
     @Transactional(readOnly = true)
     public PessoaResponse getByCpfCnpj(String cpfCnpj) {
         return repository.findByCpfCnpj(cpfCnpj)
@@ -46,7 +44,6 @@ public class PessoaService {
                 .orElseThrow(() -> new PessoaNaoEncontradaException(String.format("Nenhuma pessoa encontrada com CPF/CNPJ '%s'.", cpfCnpj)));
     }
 
-    // LIST paginado
     @Transactional(readOnly = true)
     public Page<PessoaResponse> list(int page, int size, String sortBy, Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));

@@ -4,10 +4,12 @@ import com.br.pdvpostocombustivel.api.produto.dto.ProdutoRequest;
 import com.br.pdvpostocombustivel.api.produto.dto.ProdutoResponse;
 import com.br.pdvpostocombustivel.domain.entity.Produto;
 import com.br.pdvpostocombustivel.domain.repository.ProdutoRepository;
-import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException; // <-- Import
-import com.br.pdvpostocombustivel.exception.RegraNegocioException; // <-- Import (para o futuro)
+import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
+import com.br.pdvpostocombustivel.exception.RegraNegocioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,10 +40,9 @@ public class ProdutoService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProdutoResponse> listAll() {
-        return repository.findAll().stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+    public Page<ProdutoResponse> listAll(Pageable pageable) {
+        return repository.findAll(pageable)
+                .map(this::toResponse);
     }
 
     public ProdutoResponse update(Long id, ProdutoRequest req) {

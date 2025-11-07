@@ -1,11 +1,11 @@
 package com.br.pdvpostocombustivel.api.produto;
 
-
-
 import com.br.pdvpostocombustivel.api.produto.dto.ProdutoRequest;
 import com.br.pdvpostocombustivel.api.produto.dto.ProdutoResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -31,8 +31,8 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<ProdutoResponse> list() {
-        return service.listAll();
+    public Page<ProdutoResponse> list(Pageable pageable) {
+        return service.listAll(pageable);
     }
 
     @PutMapping("/{id}")
