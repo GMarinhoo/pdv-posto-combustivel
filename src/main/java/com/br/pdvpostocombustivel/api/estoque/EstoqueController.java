@@ -2,6 +2,8 @@ package com.br.pdvpostocombustivel.api.estoque;
 
 import com.br.pdvpostocombustivel.api.estoque.dto.EstoqueRequest;
 import com.br.pdvpostocombustivel.api.estoque.dto.EstoqueResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -28,8 +30,8 @@ public class EstoqueController {
     }
 
     @GetMapping
-    public List<EstoqueResponse> list() {
-        return service.listAll();
+    public Page<EstoqueResponse> list(Pageable pageable) {
+        return service.listAll(pageable);
     }
 
     @PutMapping("/{id}")

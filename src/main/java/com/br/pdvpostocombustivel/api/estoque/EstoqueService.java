@@ -8,6 +8,8 @@ import com.br.pdvpostocombustivel.domain.repository.EstoqueRepository;
 import com.br.pdvpostocombustivel.domain.repository.ProdutoRepository;
 import com.br.pdvpostocombustivel.exception.EntidadeNaoEncontradaException;
 import com.br.pdvpostocombustivel.exception.RegraNegocioException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,10 +70,9 @@ public class EstoqueService {
     }
 
     @Transactional(readOnly = true)
-    public List<EstoqueResponse> listAll() {
-        return repository.findAllComProduto().stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+    public Page<EstoqueResponse> listAll(Pageable pageable) {
+        return repository.findAll(pageable)
+                .map(this::toResponse);
     }
 
     public EstoqueResponse update(Long id, EstoqueRequest req) {

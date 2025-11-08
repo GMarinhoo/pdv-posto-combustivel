@@ -4,6 +4,7 @@ import com.br.pdvpostocombustivel.enums.TipoEstoque;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public record EstoqueResponse(
@@ -14,8 +15,8 @@ public record EstoqueResponse(
         String loteEndereco,
         String loteFabricacao,
 
-        @JsonFormat(pattern = "dd/MM/yyyy", timezone = "America/Sao_Paulo")
-        Date dataValidade,
+        @JsonFormat(pattern = "dd/MM/yyyy")
+        LocalDate dataValidade,
 
         TipoEstoque tipo
 ) {}

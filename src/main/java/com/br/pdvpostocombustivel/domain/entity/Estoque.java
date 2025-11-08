@@ -4,6 +4,7 @@ import com.br.pdvpostocombustivel.enums.TipoEstoque;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -26,7 +27,7 @@ public class Estoque {
     private String loteFabricacao;
 
     @Column(nullable = false)
-    private Date dataValidade;
+    private LocalDate dataValidade;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -37,7 +38,7 @@ public class Estoque {
     @JoinColumn(name = "id_produto", nullable = false, unique = true)
     private Produto produto;
 
-    public Estoque (BigDecimal quantidade, String localTanque, String loteEndereco, String loteFabricacao, Date dataValidade, TipoEstoque tipo, Produto produto) {
+    public Estoque (BigDecimal quantidade, String localTanque, String loteEndereco, String loteFabricacao, LocalDate dataValidade, TipoEstoque tipo, Produto produto) {
         this.quantidade = quantidade;
         this.localTanque = localTanque;
         this.loteEndereco = loteEndereco;
@@ -70,7 +71,7 @@ public class Estoque {
         return loteFabricacao;
     }
 
-    public Date getDataValidade () {
+    public LocalDate getDataValidade () {
         return dataValidade;
     }
 
@@ -94,7 +95,7 @@ public class Estoque {
         this.loteFabricacao = loteFabricacao;
     }
 
-    public void setDataValidade (Date dataValidade) {
+    public void setDataValidade (LocalDate dataValidade) {
         this.dataValidade = dataValidade;
     }
 

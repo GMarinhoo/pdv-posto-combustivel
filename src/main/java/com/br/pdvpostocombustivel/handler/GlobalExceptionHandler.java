@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SenhaInvalidaException.class)
     public ResponseEntity<ApiErroResponse> handleSenhaInvalida(SenhaInvalidaException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.UNAUTHORIZED; // 401
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
         ApiErroResponse body = new ApiErroResponse(status.value(), ex.getMessage());
         logger.warn("{} Path: {}", ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(body, status);
