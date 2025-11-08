@@ -23,16 +23,15 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public AcessoResponse authenticate(LoginRequest loginRequest) {
-        Acesso acesso = acessoRepository.findByUsuario(loginRequest.usuario())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(
-                        String.format("Usuário '%s' não encontrado.", loginRequest.usuario())));
 
-        if (!passwordEncoder.matches(loginRequest.senha(), acesso.getSenha())) {
+        Acesso acesso = acessoRepository.findByUsuario(loginRequest.usuario())
+                .orElse(null);
+
+        if (acesso == null || !passwordEncoder.matches(loginRequest.senha(), acesso.getSenha())) {
             throw new SenhaInvalidaException();
         }
 
         Pessoa pessoa = acesso.getPessoa();
-
         Long idPessoa = null;
         String nomePessoa = "Usuário sem Pessoa Vinculada";
 

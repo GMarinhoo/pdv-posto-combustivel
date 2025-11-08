@@ -1,5 +1,6 @@
 package com.br.pdvpostocombustivel.api.custo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public record CustoResponse(
@@ -8,6 +9,7 @@ public record CustoResponse(
         Double custoVariavel,
         Double custoFixo,
         Double margemLucro,
+        @JsonFormat(pattern = "dd/MM/yyyy")
         Date dataProcessamento
 ) {
 }

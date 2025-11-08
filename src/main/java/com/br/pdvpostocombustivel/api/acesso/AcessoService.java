@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -48,6 +50,47 @@ public class AcessoService {
                 novoAcesso.getPerfil(),
                 pessoaVinculada.getId(),
                 pessoaVinculada.getNomeCompleto()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public List<AcessoResponse> listarTodos() {
+        return repository.findAll().stream()
+                .map(this::toResponse) // Usa o novo helper
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    public void excluirPorId(Long id) {
+        Acesso acesso = repository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Acesso com ID " + id + " não encontrado."));
+        repository.delete(acesso);
+    }
+
+    public AcessoResponse atualizarPerfil(Long id, com.br.pdvpostocombustivel.enums.TipoAcesso novoPerfil) {
+        Acesso acesso = repository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Acesso com ID " + id + " não encontrado."));
+
+        acesso.setPerfil(novoPerfil);
+        Acesso acessoSalvo = repository.save(acesso);
+        return toResponse(acessoSalvo);
+    }
+
+    private AcessoResponse toResponse(Acesso acesso) {
+        Pessoa pessoa = acesso.getPessoa();
+        Long idPessoa = null;
+        String nomePessoa = "Pessoa não vinculada";
+
+        if (pessoa != null) {
+            idPessoa = pessoa.getId();
+            nomePessoa = pessoa.getNomeCompleto();
+        }
+
+        return new AcessoResponse(
+                acesso.getId(),
+                acesso.getUsuario(),
+                acesso.getPerfil(),
+                idPessoa,
+                nomePessoa
         );
     }
 }
